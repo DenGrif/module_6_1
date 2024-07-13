@@ -28,11 +28,13 @@ class Predator(Animal):
             self.alive = False
 
 class Flower(Plant):
-    pass
+    def __init__(self, name):
+        self.name = name
+        self.edible = False
 
 class Fruit(Plant):
     def __init__(self, name):
-        super().__init__(name)
+        self.name = name
         self.edible = True
 
 # Выполняемый код(для проверки):
