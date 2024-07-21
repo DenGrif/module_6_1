@@ -1,24 +1,22 @@
 # Родительские классы:
 class Animal:
-    alive = True
-    fed = False
-
     def __init__(self, name):
         self.name = name
+        self.alive = True   # Атрибут экземпляра
+        self.fed = False    # Атрибут экземпляра
 
     def eat(self, food):
         if food.edible:
             print(f"{self.name} съел {food.name}")
-            self.__class__.fed = True
+            self.fed = True
         else:
             print(f"{self.name} не стал есть {food.name}")
-            self.__class__.alive = False
+            self.alive = False
 
 class Plant:
-    edible = False
-
     def __init__(self, name):
         self.name = name
+        self.edible = False  # Атрибут экземпляра
 
 # Классы наследники:
 
@@ -32,7 +30,9 @@ class Flower(Plant):
     pass
 
 class Fruit(Plant):
-    edible = True
+    def __init__(self, name):
+        super().__init__(name)
+        self.edible = True  # Переопределение атрибута экземпляра
 
 # Пример результата выполнения программы:
 
@@ -41,14 +41,18 @@ a2 = Mammal('Хатико')
 p1 = Flower('Цветик семицветик')
 p2 = Fruit('Заводной апельсин')
 
-print(a1.name)
-print(p1.name)
+# Имена объектов
+print(a1.name)  # Волк с Уолл-Стрит
+print(p1.name)  # Цветик семицветик
 
-print(a1.alive)
-print(a2.fed)
+# Начальные состояния
+print(a1.alive)  # True
+print(a2.fed)    # False
 
-a1.eat(p1)
-a2.eat(p2)
+# Кормим животных
+a1.eat(p1)  # Волк с Уолл-Стрит не стал есть Цветик семицветик
+a2.eat(p2)  # Хатико съел Заводной апельсин
 
-print(a1.alive)
-print(a2.fed)
+# Конечные состояния
+print(a1.alive)  # False
+print(a2.fed)    # True
